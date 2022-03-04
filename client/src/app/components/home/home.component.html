@@ -1,0 +1,11 @@
+<div class="hero-image"></div>
+<div class="container shadow">
+    <div class="container__header shadow"><span>Strona główna</span></div>
+
+    <h1>CP Flota manager</h1>
+    <h2>Witaj w systemie zarządzania flotą pojazdów w firmie Control Process IT.</h2>
+    <ng-container *ngIf="!(accountService.currentUser$ | async) as user">
+        <button mat-raised-button (click)="redirectToLoginPage()" class="btn-submit" type="submit">Zaloguj
+            się</button>
+    </ng-container>
+</div>

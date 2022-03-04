@@ -1,0 +1,31 @@
+<div class="container shadow">
+<div class="container__header shadow"><span>Zaloguj się</span></div>
+<div class="shadow">
+    <form [formGroup]='loginForm' autocomplete="off" (ngSubmit)="loginForm.valid && login()">
+        <div class="form-items">
+            <mat-form-field class="full-width">
+                <mat-label>Login</mat-label>
+                <input type="text" matInput formControlName="userName"
+                    [class.is-invalid]='loginForm.get("userName").errors && loginForm.touched'>
+                <mat-error *ngIf="loginForm.get('userName').errors?.required">
+                    Pole: "Login" jest wymagane
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+                <mat-label>Hasło</mat-label>
+                <input type="password" matInput formControlName="password"
+                    [class.is-invalid]='loginForm.get("password").errors && loginForm.touched'>
+                <mat-error *ngIf="loginForm.get('password').errors?.required">
+                    Pole: "Hasło" jest wymagane
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button [disabled]="!loginForm.valid" class="btn-submit" type="submit">Zaloguj się</button>
+    </form>
+</div>
+</div>
+
+<!-- <p>Form value: {{loginForm.value | json}}</p>
+<p>Form status: {{loginForm.status | json}}</p>  -->

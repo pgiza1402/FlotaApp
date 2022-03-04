@@ -1,0 +1,26 @@
+<div class="table-header shadow"><span>Dodawanie opon</span></div>
+<div class="container shadow">
+    <form [formGroup]='addTiresForm' autocomplete="off" (ngSubmit)="addTiresForm.valid && addTires()">
+        <app-text-input [type]="'text'" [formControl]='addTiresForm.controls["model"]' [label]='"Producent-Model"'
+            [placeholder]="'Np. Kleber Dynaxer'"></app-text-input>
+        <app-select-input [label]="'Ilość'" [options]="quantity" [formControl]='addTiresForm.controls["quantity"]'>
+        </app-select-input>
+        <br>
+        <br>
+        <app-select-input [label]="'Miejsce składowania'" [options]="storagePlace" [formControl]='addTiresForm.controls["storagePlace"]'>
+        </app-select-input>
+
+        <app-select-input [label]="'Typ'" [options]="types" [formControl]='addTiresForm.controls["type"]'>
+        </app-select-input>
+        <app-select-input-tires [label]="'Pojazd'" [cars]="cars" [formControl]='addTiresForm.controls["carId"]'>
+        </app-select-input-tires>
+
+        <button mat-raised-button [disabled]="!addTiresForm.valid" class="btn-submit" type="submit">Dodaj
+            opony</button>
+    </form>
+
+</div>
+
+
+<!-- <p>Form value: {{addTiresForm.value | json}}</p>
+<p>Form status: {{addTiresForm.status | json}}</p>   -->

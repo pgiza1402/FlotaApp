@@ -1,0 +1,50 @@
+<div class="table-header shadow"><span>Dodawanie pojazdu</span></div>
+<div class="container shadow">
+  <form class="form" [formGroup]='addCarForm' autocomplete="off" (ngSubmit)="addCarForm.valid && addCar()">
+    <ng-container *ngIf="insuranceAndServicePage == false">
+      <app-text-input [type]="'text'" [formControl]='addCarForm.controls["brand"]' [label]='"Marka"'
+        [placeholder]="'Np. Seat'"></app-text-input>
+      <app-text-input [type]="'text'" [formControl]='addCarForm.controls["model"]' [label]='"Model"'
+        [placeholder]="'Np. Arona'"></app-text-input>
+      <br>
+      <app-text-input [type]="'text'" [formControl]='addCarForm.controls["year"]'  [label]='"Rocznik"'
+        [placeholder]="'Np. 2020'"></app-text-input>
+      <app-text-input [type]="'text'" [formControl]='addCarForm.controls["registrationNumber"]'
+        [label]='"Numer rejestracyjny"' [placeholder]="'Np. KTA 12345'"></app-text-input>
+      <br>
+      <app-select-input-user [label]="'Użytkownik'" [users]="users" [formControl]='addCarForm.controls["userName"]'>
+      </app-select-input-user>
+      <app-text-input [type]="'text'" [formControl]='addCarForm.controls["meterStatus"]' pattern="[0-9]*"
+        [label]='"Stan Licznika"' [placeholder]="'Np. 234567'"></app-text-input>
+      <br>
+      <app-select-input [label]="'Stawka Vat'" [options]="vat" [formControl]='addCarForm.controls["vat"]'>
+      </app-select-input>
+      <app-date-input [label]="'Data badania technicznego'"
+        [formControl]='addCarForm.controls["technicalExaminationExpirationDate"]'></app-date-input>
+      <br>
+      <button mat-raised-button class="btn btn-right" (click)="togglePage()">Następna strona</button>
+    </ng-container>
+    <ng-container *ngIf="insuranceAndServicePage == true">
+      <div formGroupName="service">
+        <app-text-input [type]="'text'" formControlName="nextServiceMeterStatus" pattern="[0-9]*"
+          [label]='"Przebieg następnej obsługi serwisowej"' [placeholder]="'Np. 95000'"></app-text-input>
+        <app-date-input [label]="'Data następnej obsługi serwisowej'" formControlName="serviceExpirationDate">
+        </app-date-input>
+      </div>
+      <div formGroupName="insurance">
+        <app-select-input [label]="'Ubezpieczyciel'" [options]="insurers" formControlName="insurer">
+        </app-select-input>
+        <app-date-input [label]="'Data wygaśniecia Ubezpieczenia'" formControlName="expirationDate">
+        </app-date-input>
+        <app-select-input [label]="'Pakiet'" [options]="package" formControlName="package">
+        </app-select-input>
+      </div>
+      <button mat-raised-button class="btn btn-left" (click)="togglePage()">Poprzednia Strona</button>
+      <button mat-raised-button [disabled]="!addCarForm.valid" class="btn btn-right" type="submit">Dodaj
+        samochód</button>
+    </ng-container>
+  </form>
+</div>
+
+<!-- <p>Form value: {{addCarForm.value | json}}</p>
+<p>Form status: {{addCarForm.status | json}}</p> -->

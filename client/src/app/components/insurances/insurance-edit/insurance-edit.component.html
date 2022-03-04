@@ -1,0 +1,27 @@
+<div class="table-header shadow"><span>Edycja polisy</span></div>
+<div class="container shadow">
+    <form [formGroup]='editInsuranceForm' autocomplete="off" (ngSubmit)="editInsuranceForm.valid && updateInsurance()">
+        <app-text-input [readonly]="true" [type]="'text'" [formControl]='editInsuranceForm.controls["car"]' [label]='"Pojazd"'
+            [placeholder]="'Np. Kleber Dynaxer'"></app-text-input>
+        <app-text-input [readonly]="true" [type]="'text'" [formControl]='editInsuranceForm.controls["carRegistrationNumber"]'
+            [label]='"Nr rejestracyjny"' [placeholder]="'Np. Kleber Dynaxer'"></app-text-input>
+        <br>
+        
+        <app-select-input [label]="'Ubezpieczyciel'" [options]="insurers"
+            [formControl]='editInsuranceForm.controls["insurer"]'>
+        </app-select-input>
+        <app-date-input [label]="'Data ważności'" [formControl]='editInsuranceForm.controls["expirationDate"]'>
+        </app-date-input>
+        <br>
+        <app-select-input [label]="'Pakiet'" [options]="package" [formControl]='editInsuranceForm.controls["package"]'>
+        </app-select-input>
+
+        <button mat-raised-button [disabled]="!editInsuranceForm.valid" class="btn-submit" type="submit">Zapisz
+            zmiany</button>
+    </form>
+
+</div>
+
+
+<p>Form value: {{editInsuranceForm.value | json}}</p>
+<p>Form status: {{editInsuranceForm.status | json}}</p>

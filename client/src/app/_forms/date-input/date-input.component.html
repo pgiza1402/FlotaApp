@@ -1,0 +1,12 @@
+<div  class="form-group">
+    <mat-form-field aria-readonly="true" class="full-width" appearance="fill">
+        <mat-label>{{label}}</mat-label>
+        <input readonly matInput [matDatepicker]="picker" [min]="minDate" matInput [formControl]='ngControl.control'
+            [class.is-invalid]='ngControl.invalid && ngControl.touched'>
+        <mat-datepicker-toggle disabled={{disabled}}  matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker   #picker></mat-datepicker>
+        <mat-error *ngIf="ngControl.control.errors?.required">
+            Pole: "{{label}}" jest wymagane
+          </mat-error>
+    </mat-form-field>
+</div>

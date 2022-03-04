@@ -1,0 +1,248 @@
+$red-Color: #f44336;
+$blue: #342e7c;
+$light-blue: #3f51b5;
+
+.vertical-nav {
+  width: 10%;
+  min-width: 256px;
+  display: inline-block;
+  height: 100vh;
+  background-image: linear-gradient(
+      315deg,
+      rgba(250, 251, 252, 0.8) 0%,
+      rgba(245, 247, 250) 74%
+    ),
+    url("/assets/auta.jpg");
+  background-size: cover;
+  box-shadow: 1px 1px 2em  gray;
+
+  &__photo{
+    position: relative; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 75%; 
+    margin-top: 5%;
+    cursor: pointer;
+  }
+
+  
+  
+  &__menu{
+    position: relative;
+    left: 50%;
+    margin-top: 1.5em;
+    padding: 1em;
+    display: block;
+    transform: translateX(-50%);
+    width: 75%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      border-radius: 5px;
+      background-color: $blue;
+      color: white;
+    }
+
+    &--active{
+      background-color: rgba(143, 143, 143,0.12);
+    }
+
+    & span {
+      margin-left: 1.5em;
+    }
+
+    & i {
+      transition: transform 0.3s;
+    }
+
+    & .left {
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    & .right {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      
+    }
+
+    & .rotate{
+      transform: translateY(-50%) rotate(180deg);
+
+    }
+
+  }
+  &__menu-items{
+    top:-7px;
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 75%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgba(143, 143, 143,0.12);
+  }
+
+  &__item {
+    position: relative;
+    left: 50%;
+    margin-top: 1.5em;
+    padding: 1em;
+    display: block;
+    transform: translateX(-50%);
+    width: 75%;
+    border-radius: 5px;
+    text-align: center;
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+ 
+
+    & span {
+      margin-left: 1.5em;
+    }
+
+    & i {
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:hover {
+      background-color: $blue;
+      color: white;
+    }
+  }
+
+
+
+ 
+    
+      
+    &__menu-item{
+    position: relative;
+    margin-top: 0.5em;
+    padding: 1em;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      border-radius: 5px;
+      background-color: $blue;
+      color: white;
+    }
+    & i {
+      position: absolute;
+      left: 7%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    & span {
+      margin-left: 1.5em;
+    }
+    }
+}
+
+
+.active{
+  background-color: $blue;
+  
+    & > span, i {
+      color: white;
+    }
+ 
+}
+.horizontal-nav{
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  width: 100%;
+  height: 8vh;
+  background-color: #ffffff;
+
+  z-index: -1;
+}
+  xng-breadcrumb{
+    left: 300px;
+    
+  }
+
+  .nav-user {
+    right: 7.5%; 
+    cursor: pointer;
+
+    
+  }
+  xng-breadcrumb, .nav-user {
+    position: absolute;
+    top: 4vh;
+    transform: translateY(-0.65rem);
+    font-size: 1.3rem;
+    font-weight: bold;
+
+  }
+  
+
+img {
+  width: 100%;
+}
+
+.nav-items {
+  top: 10%;
+  display: flex;
+  position: absolute;
+}
+
+@media (max-width: 576px) {
+  .vertical-nav {
+    display: none;
+  }
+  .nav {
+    width: 100%;
+  }
+  .nav-item {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .vertical-nav {
+    display: none;
+  }
+  .nav {
+    width: 50%;
+  }
+  .nav-item {
+    font-size: 1.4rem;
+  }
+}
+
+.dropdown-items{
+  background-color: #f44336;
+  display: none;
+
+}
+
+
+

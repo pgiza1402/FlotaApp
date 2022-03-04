@@ -1,0 +1,27 @@
+<div class="table-header shadow"><span>Edycja opon</span></div>
+<div class="container shadow">
+    <form [formGroup]='editTiresForm' autocomplete="off" (ngSubmit)="editTiresForm.valid && updateTires()">
+        <app-text-input [type]="'text'" [formControl]='editTiresForm.controls["model"]' [label]='"Producent-Model"'
+            [placeholder]="'Np. Kleber Dynaxer'"></app-text-input>
+            <app-select-input [label]="'Ilość'" [options]="quantity" [formControl]='editTiresForm.controls["quantity"]'> </app-select-input>
+        <br>
+        <br>
+        <app-select-input [label]="'Miejsce składowania'" [options]="storagePlace" [formControl]='editTiresForm.controls["storagePlace"]'>
+        </app-select-input>
+       
+        <app-select-input [label]="'Typ'" [options]="types" [formControl]='editTiresForm.controls["type"]'> </app-select-input>
+        <app-select-input-tires [label]="'Pojazd'" [cars]="cars" [formControl]='editTiresForm.controls["carId"]' ></app-select-input-tires>
+        <br>
+        <br>
+        
+        <br>
+        <br>
+        <button mat-raised-button [disabled]="!editTiresForm.valid" class="btn-submit" type="submit">Zapisz
+            zmiany</button>
+    </form>
+
+</div>
+
+<!-- 
+ <p>Form value: {{editTiresForm.value | json}}</p>
+<p>Form status: {{editTiresForm.status | json}}</p>   -->

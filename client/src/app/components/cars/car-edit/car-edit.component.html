@@ -1,0 +1,55 @@
+<div class="table-header shadow"><span>Edycja pojazdu</span></div>
+<div class="container shadow">
+    <form [formGroup]='editCarForm' autocomplete="off" (ngSubmit)="editCarForm.valid && updateCar()">
+        <ng-container *ngIf="insuranceAndServicePage == false">
+        <app-text-input [readonly]="disabled" read [type]="'text'" [formControl]='editCarForm.controls["brand"]' [label]='"Marka"'
+            [placeholder]="'Np. Seat'"></app-text-input>
+        <app-text-input [readonly]="disabled" [type]="'text'" [formControl]='editCarForm.controls["model"]' [label]='"Model"'
+            [placeholder]="'Np. Arona'"></app-text-input>
+        <br>
+        <app-text-input [readonly]="disabled" [type]="'text'" [formControl]='editCarForm.controls["year"]' pattern="[0-9]*" [label]='"Rocznik"'
+        [placeholder]="'Np. 2020'"></app-text-input>
+        <app-text-input [readonly]="disabled" [type]="'text'" [formControl]='editCarForm.controls["registrationNumber"]'
+        [label]='"Numer rejestracyjny"' [placeholder]="'Np. KTA 12345'"></app-text-input>
+        <br>
+        <app-select-input-user [disabled]="disabled" [label]="'Użytkownik'" [users]="users"
+            [formControl]='editCarForm.controls["userName"]'></app-select-input-user>
+        <app-text-input [type]="'text'" [formControl]='editCarForm.controls["meterStatus"]' pattern="[0-9]*"
+            [label]='"Stan Licznika"' [placeholder]="'Np. 234567'"></app-text-input>
+            <br>
+        <app-select-input [disabled]="disabled" [label]="'Stawka Vat'" [options]="vat" [formControl]='editCarForm.controls["vat"]'>
+        </app-select-input>
+        <app-date-input [label]="'Data badania technicznego'"
+            [formControl]='editCarForm.controls["technicalExaminationExpirationDate"]'></app-date-input>
+        <br>
+        <button mat-raised-button class="btn btn-right" (click)="togglePage()">Następna strona</button>
+    </ng-container>
+    <ng-container *ngIf="insuranceAndServicePage == true">
+        <div formGroupName="service">
+            <app-text-input  [type]="'text'" formControlName="nextServiceMeterStatus" pattern="[0-9]*"
+                [label]='"Przebieg następnej obsługi serwisowej"' [placeholder]="'Np. 95000'"></app-text-input>
+            <app-date-input [label]="'Data następnej obsługi serwisowej'" formControlName="serviceExpirationDate">
+            </app-date-input>
+        </div>
+        <div formGroupName="insurance">
+            <app-select-input [disabled]="disabled"  [label]="'Ubezpieczyciel'" [options]="insurers" formControlName="insurer">
+            </app-select-input>
+            <app-date-input [disabled]="disabled" [label]="'Data wygaśniecia Ubezpieczenia'" formControlName="expirationDate">
+            </app-date-input>
+            <app-select-input [disabled]="disabled" [label]="'Pakiet'" [options]="package" formControlName="package">
+            </app-select-input>
+            <div class="form-group">
+            <mat-checkbox [disabled]="disabled" color="primary" [formControl]='editCarForm.controls["isArchival"]' class="check warn">Pojazd archiwalny</mat-checkbox>
+            </div>
+            
+            
+          </div>
+          <button mat-raised-button class="btn btn-left" (click)="togglePage()">Poprzednia Strona</button>
+        <button mat-raised-button [disabled]="!editCarForm.valid || !editCarForm.dirty" class="btn btn-right"
+            type="submit">Zapisz zmiany</button>
+        </ng-container>
+    </form>
+</div>
+<!-- 
+ <p>Form value: {{editCarForm.value | json}}</p>
+<p>Form status: {{editCarForm.status | json}}</p>   -->

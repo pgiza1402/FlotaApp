@@ -1,0 +1,28 @@
+<div class="table-header shadow"><span>Edycja użytkownika</span></div>
+<div class="container shadow">
+    <form [formGroup]='editUserForm' autocomplete="off" (ngSubmit)="editUserForm.valid && updateUser()">
+        <app-text-input [type]="'text'" [formControl]='editUserForm.controls["userName"]' [label]='"Login"'
+            [placeholder]="'Np. jkowalski'"></app-text-input>
+        <app-text-input [type]="'text'" [formControl]='editUserForm.controls["email"]' [label]='"Adres e-mail"'
+            [placeholder]="'przykładowy@mail.pl'"></app-text-input>
+        <br>
+        <br>
+        <app-text-input [type]="'text'" [formControl]='editUserForm.controls["phoneNumber"]' [label]='"Numer telefonu"'
+            [placeholder]="'Np. 123456789'"></app-text-input>
+        <app-select-input [label]="'Role'" [options]="roles" [formControl]='editUserForm.controls["role"]'>
+        </app-select-input>
+        <br>
+        <br>
+        <app-text-input [type]="'password'" [formControl]='editUserForm.controls["password"]' [label]='"Hasło"'
+            [placeholder]="'Wymagane cyfry oraz liczby'"></app-text-input>
+        <app-text-input [type]="'password'" [formControl]='editUserForm.controls["confirmPassword"]'
+            [label]='"Powtórz hasło"'></app-text-input>
+        <br>
+        <br>
+        <button mat-raised-button [disabled]="!editUserForm.valid || !editUserForm.dirty" class="btn-submit" type="submit">Zapisz
+            zmiany</button>
+    </form>
+</div>
+
+ <!-- <p>Form value: {{editUserForm.value | json}}</p>
+<p>Form status: {{editUserForm.status | json}}</p>   -->

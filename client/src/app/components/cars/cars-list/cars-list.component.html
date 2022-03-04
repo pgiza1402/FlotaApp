@@ -1,0 +1,112 @@
+
+<div class="table-header shadow"><span>Lista samochodów</span>
+<div class="addons">
+<span (click)="getExcel()" class="btn btn-excel"><i class="material-icons">file_download</i> Excel</span>
+<span (click)="getPdf()" class="btn btn-pdf"><i class="material-icons">file_download</i> Pdf</span>
+<mat-form-field class="search" appearance="fill">
+  <mat-label class="search-label">Szukaj</mat-label>
+  <input matInput type="text" (keyup)="doFilter($event.target.value)">
+</mat-form-field>
+</div>
+</div>
+
+
+<div class="data-table">
+  <table mat-table class="shadow" [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Lp. </th>
+      <td mat-cell *matCellDef="let element let i = index">{{i+1}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Marka</th>
+      <td mat-cell *matCellDef="let element">{{element.brand}} {{element.model}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rocznik</th>
+      <td mat-cell *matCellDef="let element">{{element.year}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Użytkownik</th>
+      <td mat-cell *matCellDef="let element">{{element.userName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="registrationNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nr rejestracyjny</th>
+      <td mat-cell *matCellDef="let element">{{element.registrationNumber}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="meterStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Stan licznika</th>
+      <td mat-cell *matCellDef="let element">{{element.meterStatus}} km.</td>
+    </ng-container>
+
+    <ng-container matColumnDef="vat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>VAT</th>
+      <td
+       mat-cell *matCellDef="let element">{{element.vat}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="carInsuranceExpirationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ważność ubezpieczenia</th>
+      <td matTooltip="Ubezpieczenie ważne: {{calculateDays(element.carInsuranceExpirationDate)}} dni"
+        [matTooltipPosition]="'above'" [class.error]="statusError(element.carInsuranceExpirationDate)"
+        [class.warning]="statusWarning(element.carInsuranceExpirationDate)"
+        [class.info]="statusInformation(element.carInsuranceExpirationDate)" mat-cell *matCellDef="let element">
+        {{element.carInsuranceExpirationDate | date: "dd-MM-yyyy"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="technicalExaminationExpirationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Termin badania techn.</th>
+      <td matTooltip="Badanie technicze ważne: {{calculateDays(element.technicalExaminationExpirationDate)}} dni"
+        [matTooltipPosition]="'above'" [class.error]="statusError(element.technicalExaminationExpirationDate)"
+        [class.warning]="statusWarning(element.technicalExaminationExpirationDate)"
+        [class.info]="statusInformation(element.technicalExaminationExpirationDate)" mat-cell *matCellDef="let element">
+        {{element.technicalExaminationExpirationDate | date: "dd-MM-yyyy"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="serviceExpirationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Termin serwisu</th>
+      <td matTooltip="Następna obsługa serwisowa za: {{calculateDays(element.serviceExpirationDate)}} dni"
+        [matTooltipPosition]="'above'" matTooltipClass="tooltip"
+        [class.error]="statusError(element.serviceExpirationDate)"
+        [class.warning]="statusWarning(element.serviceExpirationDate)"
+        [class.info]="statusInformation(element.serviceExpirationDate)" mat-cell *matCellDef="let element">
+        {{element.serviceExpirationDate | date: "dd-MM-yyyy"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nextServiceMeterStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nast. serwis</th>
+      <td
+      matTooltip="Następna obsługa serwisowa za: {{calculateKm(element.meterStatus, element.nextServiceMeterStatus)}} km"
+      [class.error]="meterStatusError(element.meterStatus, element.nextServiceMeterStatus)"
+      [class.warning]="meterStatusWarning(element.meterStatus, element.nextServiceMeterStatus)"
+       mat-cell *matCellDef="let element">{{element.nextServiceMeterStatus}} km.</td>
+    </ng-container>
+
+    <ng-container matColumnDef=" ">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td matTooltip="Edycja pojazdu: {{element.brand}} {{element.model}}" [matTooltipPosition]="'above'" mat-cell
+        *matCellDef="let element"><i routerLink="/car/{{element.id}}" class="material-icons edit-icon">edit</i></td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator class="shadow" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

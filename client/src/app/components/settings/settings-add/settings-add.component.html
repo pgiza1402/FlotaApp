@@ -1,0 +1,70 @@
+<div class="table-header shadow"><span>Dodaj kategorie</span>
+    <div class="addons">
+      <mat-form-field class="search" appearance="fill">
+        <mat-label>Szukaj</mat-label>
+        <input matInput type="text" (keyup)="doFilter($event.target.value)">
+        </mat-form-field>
+    </div>
+    
+  </div>
+
+  <div class="container shadow">
+  <div class="data-table--settings" >
+      <table mat-table class="shadow" [dataSource]="dataSource" matSort>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef  > Lp. </th>
+          <td mat-cell *matCellDef="let element let i = index"> {{i+1}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Pole </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Kategoria </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+  
+       
+        <ng-container matColumnDef=" ">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td  mat-cell *matCellDef="let element"><i matTooltip="Edycja pola {{element.name}} dla kategorii {{element.category}}" [matTooltipPosition]="'above'" routerLink="/settings/{{element.id}}" class="material-icons edit-icon">edit</i>
+            <i (click)="openDialog(element.name, element.category, element.id)" class="material-icons remove-icon">highlight_remove</i></td>
+        </ng-container>
+
+       
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <ng-template #confirm>
+          <div class="modal-body text-center">
+            <p>Czy napewno chcesz usunąć specialistę : <strong>{{element.name}}
+                {{specialist.specialistSurname}}</strong></p>
+            <button type="button" class="btn btn-error" (click)="accept(element.id)">Tak</button>
+            <button style="margin-left: 15px;" type="button" class="btn btn-primary" (click)="decline()">Nie</button>
+          </div>
+        </ng-template>
+      </table>
+    
+      <mat-paginator class="shadow" [pageSizeOptions]="[8]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <form class="form-group--settings" [formGroup]='addFieldForm' autocomplete="off" (ngSubmit)="addFieldForm.valid && addField()">
+        <app-text-input [type]="'text'" [formControl]='addFieldForm.controls["name"]' [label]='"Pole"'
+            [placeholder]="'Np. PZU, 4, Hotel Ford'"></app-text-input>
+            <br>
+        <app-select-input [label]="'Kategoria'" [options]="category" [formControl]='addFieldForm.controls["category"]'>
+        </app-select-input>
+
+        
+        <button mat-raised-button [disabled]="!addFieldForm.valid" class="btn-submit" type="submit">Dodaj
+            pole</button>
+    </form>
+</div>
+
+

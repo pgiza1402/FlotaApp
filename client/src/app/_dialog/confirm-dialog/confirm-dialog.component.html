@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Usuwanie</h1>
+<div mat-dialog-content>Czy napewno chcesz usunąć pozycję: <strong>{{label}}</strong> z kategorii: <strong>{{category}}</strong> </div>
+<div mat-dialog-actions align="end">
+  <button class="btn-submit" mat-button color="primary" [mat-dialog-close]="true">Tak</button>
+  <button mat-button [mat-dialog-close]="false">Zamknij</button>
+</div>

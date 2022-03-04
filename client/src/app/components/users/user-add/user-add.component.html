@@ -1,0 +1,29 @@
+<div class="table-header shadow"><span>Dodawanie użytkownika</span></div>
+<div class="container shadow">
+    <form [formGroup]='addUserForm' autocomplete="off" (ngSubmit)="addUserForm.valid && addUser()">
+        <app-text-input [type]="'text'" [formControl]='addUserForm.controls["userName"]' [label]='"Login"'
+            [placeholder]="'Np. jkowalski'"></app-text-input>
+        <app-text-input [type]="'text'" [formControl]='addUserForm.controls["email"]' [label]='"Adres e-mail"'
+            [placeholder]="'przykładowy@mail.pl'"></app-text-input>
+        <br>
+        <br>
+        <app-text-input [type]="'text'" [formControl]='addUserForm.controls["phoneNumber"]' [label]='"Numer telefonu"'
+            [placeholder]="'Np. 123456789'"></app-text-input>
+        <app-select-input [label]="'Role'" [options]="roles" [formControl]='addUserForm.controls["role"]'>
+        </app-select-input>
+        <br>
+        <br>
+        <app-text-input [type]="'password'" [formControl]='addUserForm.controls["password"]' [label]='"Hasło"'
+            [placeholder]="'Wymagane cyfry oraz liczby'"></app-text-input>
+        <app-text-input [type]="'password'" [formControl]='addUserForm.controls["confirmPassword"]'
+            [label]='"Powtórz hasło"'></app-text-input>
+        <br>
+        <br>
+        <button mat-raised-button [disabled]="!addUserForm.valid" class="btn-submit" type="submit">Dodaj
+            użytkownika</button>
+    </form>
+
+</div>
+
+ <!-- <p>Form value: {{addUserForm.value | json}}</p>
+<p>Form status: {{addUserForm.status | json}}</p>   -->

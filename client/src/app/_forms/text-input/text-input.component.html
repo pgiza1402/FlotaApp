@@ -1,0 +1,40 @@
+<div class="form-group">
+  <mat-form-field class="full-width">
+      
+    <mat-label>{{label}}</mat-label>
+    <input readonly="{{readonly}}" type="{{type}}" matInput [formControl]='ngControl.control'
+    [class.is-invalid]='ngControl.invalid && ngControl.touched' placeholder="{{placeholder}}">
+    <mat-error *ngIf="ngControl.control.errors?.required">
+      Pole: "{{label}}" jest wymagane
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.pattern">
+      W polu: "{{label}}" możesz wpisać tylko cyfry
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.minlength">
+      Pole: "{{label}}" musi mieć conajmniej {{ngControl.control.errors.minlength['requiredLength']}} znaków
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.isMatching">
+      Hasło różni się od hasła wpisanego powyżej
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.isContains">
+      Pole: "{{label}}" musi się składać z liter oraz cyfr
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.isDuplicate">
+      Wpisana wartość już istnieje
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.onlyNumbersWhenTires">
+      Dla ilości opon można podać tylko cyfry
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.isValidEmail">
+      Podany adres e-mail jest błędny
+    </mat-error>
+    <mat-error *ngIf="ngControl.control.errors?.correctYear">
+      Rocznik pojazdu jest mniejszy niż 2008 lub rocznik jest z przyszłości
+    </mat-error>
+   
+    <mat-error *ngIf="ngControl.control.errors?.userNameExists">
+      Nazwa użytkownika jest zajęta
+    </mat-error>
+    
+  </mat-form-field>
+</div>

@@ -1,0 +1,63 @@
+<nav class="vertical-nav">
+        <img class="vertical-nav__photo" src="/assets/logo.png" routerLink='/' alt="">
+        <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+                <div *appHasRole='["Administrator"]' [class.vertical-nav__menu--active]='carsMenu'
+                        class="vertical-nav__menu" (click)="hideCars($event.target)"><i
+                                class="material-icons left">directions_car</i><span>Flota</span><i
+                                [class.rotate]='carsMenu' class="material-icons right">arrow_drop_down</i></div>
+                <div class="vertical-nav__menu-items" *ngIf="carsMenu">
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/cars'
+                                routerLinkActive='active'><i class="material-icons">format_list_bulleted</i><span>Lista
+                                        pojazdów</span></a>
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/add-car'
+                                routerLinkActive='active'><i class="material-icons">add_to_photos</i><span>Dodaj
+                                        pojazd</span></a>
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/archival-cars'
+                                routerLinkActive='active'><i
+                                        class="material-icons">format_list_bulleted</i><span>Archiwum</span></a>
+                </div>
+                <div *appHasRole='["Administrator"]' [class.vertical-nav__menu--active]='tiresMenu'
+                        class="vertical-nav__menu" (click)="hideTires()"><i
+                                class="material-icons left">circle</i><span>Opony</span><i [class.rotate]='tiresMenu'
+                                class="material-icons right">arrow_drop_down</i></div>
+                <div class="vertical-nav__menu-items" *ngIf="tiresMenu">
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/tires'
+                                routerLinkActive='active'><i class="material-icons">format_list_bulleted</i><span>Lista
+                                        opon</span></a>
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/add-tires'
+                                routerLinkActive='active'><i class="material-icons">add_to_photos</i><span>Dodaj
+                                        opony</span></a>
+                </div>
+                <a *appHasRole='["Administrator"]' class="vertical-nav__item" routerLink='/insurances'
+                        routerLinkActive='active'><i class="material-icons">format_list_bulleted</i><span>Lista
+                                polis</span></a>
+                <div *appHasRole='["Administrator"]' [class.vertical-nav__menu--active]='usersMenu'
+                        class="vertical-nav__menu" (click)="hideUsers()"><i
+                                class="material-icons left">people</i><span>Użytkownicy</span><i
+                                [class.rotate]='usersMenu' class="material-icons right">arrow_drop_down</i></div>
+                <div class="vertical-nav__menu-items" *ngIf="usersMenu">
+
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/users'
+                                routerLinkActive='active'><i class="material-icons">format_list_bulleted</i><span>Lista
+                                        użytkowników</span></a>
+                        <a *appHasRole='["Administrator"]' class="vertical-nav__menu-item" routerLink='/add-user'
+                                routerLinkActive='active'><i class="material-icons">person_add</i><span>Dodaj
+                                        użytkownika</span></a>
+                </div>
+
+                <a *appHasRole='["Administrator"]' class="vertical-nav__item" routerLink='/settings'
+                        routerLinkActive='active'><i class="material-icons">settings</i><span>Kategorie</span></a>
+                <a *appHasRole='["Administrator"]' class="vertical-nav__item" routerLink='/logs'
+                        routerLinkActive='active'><i class="material-icons">format_list_bulleted</i><span>Lista
+                                Zdarzeń</span></a>
+
+
+        </ng-container>
+</nav>
+
+
+<div class="horizontal-nav"></div>
+<xng-breadcrumb></xng-breadcrumb>
+<ng-container *ngIf="(accountService.currentUser$ | async) as user">
+        <span mat-raised-button (click)="logout()" class="nav-user">{{user.displayName | titlecase}} - Wyloguj</span>
+</ng-container>

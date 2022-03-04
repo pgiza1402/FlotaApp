@@ -1,0 +1,12 @@
+<div class="form-group">
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>{{label}}</mat-label>
+        <mat-select disabled={{disabled}}  [formControl]='ngControl.control' [class.is-invalid]='ngControl.invalid && ngControl.touched'>
+            <mat-option [value]="null"></mat-option>
+            <mat-option *ngFor="let user of users" [value]="user.userName">{{user.displayName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="ngControl.control.errors?.required">
+            Pole: "{{label}}" jest wymagane
+        </mat-error>
+    </mat-form-field>
+</div>

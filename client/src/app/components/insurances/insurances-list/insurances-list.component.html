@@ -1,0 +1,57 @@
+<div class="table-header shadow"><span>Lista polis</span>
+    <div class="addons">
+      <mat-form-field class="search" appearance="fill">
+        <mat-label>Szukaj</mat-label>
+        <input matInput type="text" (keyup)="doFilter($event.target.value)">
+        </mat-form-field>
+    </div>
+    
+  </div>
+
+  <div class="data-table">
+      <table mat-table class="shadow" [dataSource]="dataSource" matSort>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef  > Lp. </th>
+          <td mat-cell *matCellDef="let element let i = index"> {{i+1}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="carRegistrationNumber">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Nr rejestracyjny </th>
+          <td mat-cell *matCellDef="let element"> {{element.carRegistrationNumber}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="car">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Samochód </th>
+          <td mat-cell *matCellDef="let element"> {{element.car}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="insurer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubezpieczyciel </th>
+          <td mat-cell *matCellDef="let element"> {{element.insurer}}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expirationDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ważność ubezpieczenia </th>
+          <td mat-cell *matCellDef="let element"> {{element.expirationDate | date: "dd-MM-yyyy"}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="package">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pakiet </th>
+          <td mat-cell *matCellDef="let element"> {{element.package}} </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef=" ">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td matTooltip="Edycja polisy dla pojazdu: {{element.car}} - {{element.carRegistrationNumber}}" [matTooltipPosition]="'above'" mat-cell *matCellDef="let element"><i routerLink="/insurance/{{element.id}}" class="material-icons edit-icon">edit</i></td>
+        </ng-container>
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator class="shadow" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+    </div>
